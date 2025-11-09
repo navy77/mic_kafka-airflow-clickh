@@ -1,0 +1,28 @@
+version: '3'
+services:
+  kafka_producer:
+    build: .
+    image: mic/kafka_producer:1.0.0
+    container_name: kafka_producer
+    environment:
+      - TZ=Asia/Bangkok
+
+# version: '3'
+# services:
+#   kafka_producer1:
+#     build:
+#       context: .
+#       dockerfile: p1.Dockerfile
+#     image: mic/kafka_producer1:1.0.0
+#     container_name: kafka_producer1
+#     environment:
+#       - TZ=Asia/Bangkok
+
+#   kafka_producer2:
+#     build:
+#       context: .
+#       dockerfile: p2.Dockerfile
+#     image: mic/kafka_producer2:1.0.0
+#     container_name: kafka_producer2
+#     environment:
+#       - TZ=Asia/Bangkok

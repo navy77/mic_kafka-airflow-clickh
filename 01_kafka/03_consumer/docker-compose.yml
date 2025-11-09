@@ -1,0 +1,9 @@
+version: '3'
+services:
+  kafka_consumer:
+    build: .
+    image: mic/kafka_consumer:1.0.0
+    container_name: kafka_consumer
+    environment:
+      - TZ=Asia/Bangkok
+

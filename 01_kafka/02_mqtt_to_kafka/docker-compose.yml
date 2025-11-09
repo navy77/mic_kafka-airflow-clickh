@@ -1,0 +1,13 @@
+version: '3'
+services:
+  mqtt_to_kafka:
+    build: .
+    image: mic/mqtt_kafka:1.0.1
+    container_name: mqtt_to_kafka
+    environment:
+      - TZ=Asia/Bangkok
+    privileged: true
+    volumes:
+      - ./.env:/app/.env
+      - ./log/mqtt_to_kafka.log:/app/log/mqtt_to_kafka.log
+    restart: always
