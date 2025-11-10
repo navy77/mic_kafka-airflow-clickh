@@ -1,0 +1,92 @@
+
+## single node
+
+version: '3'
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:25.6
+    container_name: clickhouse-server
+    environment:
+      CLICKHOUSE_USER: admin
+      CLICKHOUSE_PASSWORD: password
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: 1
+    mem_limit: 2g
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    volumes:
+      - clickhouse-data:/var/lib/clickhouse
+
+volumes:
+  clickhouse-data:
+
+# cluster
+
+# version: '3'
+
+# services:
+#   zookeeper:
+#     image: 'bitnami/zookeeper:latest'
+#     networks:
+#       - ch_replicated
+#     environment:
+#       - ALLOW_ANONYMOUS_LOGIN=yes
+#       - ZOOKEEPER_CLIENT_PORT=2181
+#     ports:
+#       - "2182:2181"
+#       - "2888:2888"
+#       - "3888:3888"
+    
+#   clickhouse1:
+#     image: clickhouse/clickhouse-server:25.6
+#     environment:
+#       CLICKHOUSE_USER: admin
+#       CLICKHOUSE_PASSWORD: password
+#     ports:
+#       - "8002:9000"
+#       - "9123:8123"
+#     mem_limit: 2g
+#     ulimits:
+#       nproc: 65535
+#       nofile:
+#         soft: 262144
+#         hard: 262144
+#     networks:
+#       - ch_replicated
+#     depends_on:
+#       - zookeeper
+#     volumes:
+#       - type: bind
+#         source: ./config_replica1.xml
+#         target: /etc/clickhouse-server/config.xml
+
+#   clickhouse2:
+#     image: clickhouse/clickhouse-server:25.6
+#     environment:
+#       CLICKHOUSE_USER: admin
+#       CLICKHOUSE_PASSWORD: password
+#     ports:
+#       - "8003:9000"
+#       - "9124:8123"
+#     mem_limit: 2g
+#     ulimits:
+#       nproc: 65535
+#       nofile:
+#         soft: 262144
+#         hard: 262144
+#     networks:
+#       - ch_replicated
+#     depends_on:
+#       - zookeeper
+#     volumes:
+#       - type: bind
+#         source: ./config_replica2.xml
+#         target: /etc/clickhouse-server/config.xml
+
+# networks:
+#   ch_replicated:
+#     driver: bridge
